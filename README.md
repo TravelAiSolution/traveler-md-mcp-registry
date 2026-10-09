@@ -8,7 +8,7 @@ This repository describes the hosted MCP (Model Context Protocol) server at `htt
 
 The server stores two kinds of document and returns them on request.
 
-- **traveler.md** is the profile. It holds stable preferences: seat choice, hotel style, budget, dietary preferences, travel companions. One per traveler.
+- **traveler.md** is the profile. It holds stable preferences: seat choice, hotel style, budget, dining style, travel companions. One per traveler.
 - **trip.md** is one trip. It holds destinations, dates, itinerary, bookings and notes. Many per traveler.
 
 An assistant reads these before it plans or recommends, so the traveler does not repeat themselves. An assistant writes back what it learns, so the next conversation starts with the same knowledge.
@@ -99,7 +99,7 @@ An Agent Plugin that packages this server together with skills for onboarding, t
 
 ## Data and privacy
 
-The traveler owns every record. Access is granted per client through OAuth and revoked from the Traveler.md account page. The server rejects payment card numbers, passport numbers, known traveler numbers, social security numbers and door or access codes. The tools are also instructed not to record health, accessibility or biometric details. The privacy policy is at <https://traveler.md/privacy>.
+The traveler owns every record. Access is granted per client through OAuth and revoked from the Traveler.md account page. The server rejects payment card numbers, passport numbers, known traveler numbers, social security numbers and door or access codes. The tools are also instructed not to record health, accessibility, dietary or biometric details. The privacy policy is at <https://traveler.md/privacy>.
 
 ## Support
 
