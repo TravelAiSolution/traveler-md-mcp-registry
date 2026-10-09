@@ -25,7 +25,7 @@ Scope: travel memory only. The server has no inventory, no prices, no availabili
 | `list_trips`     | Page or search trips by title, content, status or date      |
 | `read_trip`      | Return one trip                                             |
 | `create_trip`    | Create a trip with a title and a status                     |
-| `update_trip`    | Change a trip's status, dates or sections                   |
+| `update_trip`    | Change a trip's status, dates, sections or dated events     |
 | `archive_trip`   | File a trip away                                            |
 
 Every document is a set of named sections. Each section is a list of short sentences. Updates require the `version_hash` from the most recent read, so two assistants writing the same record cannot overwrite each other silently.
@@ -99,7 +99,7 @@ An Agent Plugin that packages this server together with skills for onboarding, t
 
 ## Data and privacy
 
-The traveler owns every record. Access is granted per client through OAuth and revoked from the Traveler.md account page. The server rejects medical detail in every section, including allergies and dietary restrictions written as health information. The privacy policy is at <https://traveler.md/privacy>.
+The traveler owns every record. Access is granted per client through OAuth and revoked from the Traveler.md account page. The server rejects payment card numbers, passport numbers, known traveler numbers, social security numbers and door or access codes. The tools are also instructed not to record health, accessibility or biometric details. The privacy policy is at <https://traveler.md/privacy>.
 
 ## Support
 
