@@ -17,18 +17,20 @@ Scope: travel memory only. The server has no inventory, no prices, no availabili
 
 ## Tools
 
-| Tool             | Purpose                                                     |
-| ---------------- | ----------------------------------------------------------- |
-| `read_profile`   | Return the profile, optionally filtered to named sections   |
-| `create_profile` | Create the profile on first use                             |
-| `update_profile` | Change one or more profile sections                         |
-| `list_trips`     | Page or search trips by title, content, status or date      |
-| `read_trip`      | Return one trip                                             |
-| `create_trip`    | Create a trip with a title and a status                     |
-| `update_trip`    | Change a trip's status, dates, sections or dated events     |
-| `archive_trip`   | File a trip away                                            |
+| Tool             | Purpose                                                                  |
+| ---------------- | ------------------------------------------------------------------------ |
+| `read_profile`   | Return the profile, optionally filtered to named sections                |
+| `create_profile` | Create the profile on first use                                          |
+| `update_profile` | Record a lasting preference in one or more profile sections              |
+| `list_trips`     | Find trips by title, content, status or start date                       |
+| `read_trip`      | Return one trip with its sections and dated events                       |
+| `create_trip`    | Open a trip with a title and a status, and optionally its booked events  |
+| `update_trip`    | Change a trip's status, dates, sections or dated events                  |
+| `archive_trip`   | Move a trip to the archive in the traveler's account. Nothing is deleted |
 
-Every document is a set of named sections. Each section is a list of short sentences. Updates require the `version_hash` from the most recent read, so two assistants writing the same record cannot overwrite each other silently.
+Every document is a set of named sections. Each section is a list of short sentences. The profile has 20 sections, for example `flight_preferences`, `accommodation`, `food_dining`, `loyalty_programs` and `home_and_entry`. The `home_and_entry` section holds the home city, the countries of citizenship and the names of trusted traveler programs. A trip keeps its dated bookings as `events`, separate from its prose sections. The server also publishes the section reference for both documents as MCP resources.
+
+Every update requires the `expected_version_hash` from the most recent read or write of that record. Two assistants that write the same record cannot overwrite each other silently.
 
 ## Configuration
 
@@ -72,7 +74,7 @@ Any client that speaks remote MCP takes the URL directly:
 }
 ```
 
-Per-client guides for Claude, Cursor, ChatGPT, Gemini and others are at <https://docs.traveler.md/mcp>.
+Per-client guides are at <https://docs.traveler.md/guides>. There are guides for ChatGPT, Claude, Claude Code, Codex, Cursor, Gemini, Grok (including Grok Bot and Grok Build), Hermes, Instinct, Mistral Vibe, Muse, Notion, OpenClaw, Perplexity and VS Code. A general guide covers other clients.
 
 ## Usage
 
@@ -95,11 +97,15 @@ Before you recommend, plan, shortlist or book anything travel-related, call read
 
 ## Skills and agent plugin
 
-An Agent Plugin that packages this server together with skills for onboarding, trip interviews, trip organization and post-trip reviews is at <https://github.com/TravelAiSolution/traveler-md-agent-plugin>. The skills teach an assistant the section names, the sentence caps and the read-before-write loop.
+Agent Plugin version 1.4.0 packages this server together with skills for onboarding, trip interviews, trip organization and post-trip reviews. It is at <https://github.com/TravelAiSolution/traveler-md-agent-plugin>. The skills teach an assistant the section names, the sentence caps and the read-before-write loop.
 
 ## Data and privacy
 
-The traveler owns every record. Access is granted per client through OAuth and revoked from the Traveler.md account page. The server rejects payment card numbers, passport numbers, known traveler numbers, social security numbers and door or access codes. The tools are also instructed not to record health, accessibility, dietary or biometric details. The privacy policy is at <https://traveler.md/privacy>.
+The traveler owns every record. Access is granted per client through OAuth and revoked from the Traveler.md account page. The privacy policy is at <https://traveler.md/privacy>.
+
+### What the server will not store
+
+Traveler.md keeps four kinds of data out of the record: passport and ID numbers, known traveler numbers, payment card details and health details. The server rejects a write that contains a payment card number, a passport number, a known traveler number, a social security number or a door or access code. The error names the section and the type of data. The tool descriptions also tell the assistant not to record health, accessibility or biometric details, passwords or auth codes. A sentence can name a passport country, a card product such as Amex Platinum, or a trusted traveler program such as Global Entry.
 
 ## Support
 
